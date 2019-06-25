@@ -3,11 +3,11 @@ import { assign } from './util';
 
 /**
   * Create an virtual node (used for JSX)
-  * @param {import('./internal').VNode["type"]} type The node name or Component
+  * @param {string|function} type The node name or Component
   * constructor for this virtual node
-  * @param {object | null | undefined} [props] The properties of the virtual node
-  * @param {Array<import('.').ComponentChildren>} [children] The children of the virtual node
-  * @returns {import('./internal').VNode}
+  * @param {*} [props] The properties of the virtual node
+  * @param {Array<preact.ComponentChildren>} [children] The children of the virtual node
+  * @returns {!preact.VNode}
   */
 export function createElement(type, props, children) {
 	props = assign({}, props);
@@ -39,11 +39,11 @@ export function createElement(type, props, children) {
 
 /**
  * Create a VNode (used internally by Preact)
- * @param {import('./internal').VNode["type"]} type The node name or Component
+ * @param {string|function} type The node name or Component
  * Constructor for this virtual node
- * @param {object | string | number | null} props The properites of this virtual node.
+ * @param {*} props The properites of this virtual node.
  * If this virtual node represents a text node, this is the text of the node (string or number).
- * @param {string | number | null} key The key for this virtual node, used when
+ * @param {string|number|null} key The key for this virtual node, used when
  * diffing it against its children
  * @param {import('./internal').VNode["ref"]} ref The ref property that will
  * receive a reference to its created child

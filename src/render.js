@@ -5,10 +5,10 @@ import options from './options';
 
 /**
  * Render a Preact virtual node into a DOM element
- * @param {import('./index').ComponentChild} vnode The virtual node to render
- * @param {import('./internal').PreactElement} parentDom The DOM element to
+ * @param {!preact.ComponentChild} vnode The virtual node to render
+ * @param {!preact.PreactElement} parentDom The DOM element to
  * render into
- * @param {Element | Text} [replaceNode] Attempt to re-use an
+ * @param {(Element|Text|Object)=} replaceNode Attempt to re-use an
  * existing DOM tree rooted at `replaceNode`
  */
 export function render(vnode, parentDom, replaceNode) {
@@ -37,8 +37,8 @@ export function render(vnode, parentDom, replaceNode) {
 
 /**
  * Update an existing DOM element with data from a Preact virtual node
- * @param {import('./index').ComponentChild} vnode The virtual node to render
- * @param {import('./internal').PreactElement} parentDom The DOM element to
+ * @param {!preact.ComponentChild} vnode The virtual node to render
+ * @param {!preact.PreactElement} parentDom The DOM element to
  * update
  */
 export function hydrate(vnode, parentDom) {
