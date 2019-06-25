@@ -6,8 +6,8 @@ import { Fragment } from './create-element';
 /**
  * Base Component class. Provides `setState()` and `forceUpdate()`, which
  * trigger rendering
- * @param {object} props The initial component props
- * @param {object} context The initial context from parent components'
+ * @constructor
+ * @implements {preact.Component}
  * getChildContext
  */
 export function Component(props, context) {
@@ -31,23 +31,23 @@ export function Component(props, context) {
 
 /**
  * Update component state and schedule a re-render.
- * @param {object | ((s: object, p: object) => object)} update A hash of state
+ * update: A hash of state
  * properties to update with new values or a function that given the current
  * state and props returns a new partial state
- * @param {() => void} [callback] A function to be called once component state is
+ * callback: A function to be called once component state is
  * updated
  */
-Component.prototype.setState = function(update, callback) {
+Component.prototype.setState = function (update, callback) {
 	// only clone state when copying to nextState the first time.
-	let s = (this._nextState!==this.state && this._nextState) || (this._nextState = assign({}, this.state));
+	let s = (this._nextState !== this.state && this._nextState) || (this._nextState = assign({}, this.state));
 
 	// if update() mutates state in-place, skip the copy:
-	if (typeof update!=='function' || (update = update(s, this.props))) {
+	if (typeof update !== 'function' || (update = update(s, this.props))) {
 		assign(s, update);
 	}
 
 	// Skip update if updater function returned null
-	if (update==null) return;
+	if (update == null) return;
 
 	if (this._vnode) {
 		if (callback) this._renderCallbacks.push(callback);
@@ -57,19 +57,19 @@ Component.prototype.setState = function(update, callback) {
 
 /**
  * Immediately perform a synchronous re-render of the component
- * @param {() => void} [callback] A function to be called after component is
+ * callback: A function to be called after component is
  * re-renderd
  */
-Component.prototype.forceUpdate = function(callback) {
+Component.prototype.forceUpdate = function (callback) {
 	let vnode = this._vnode, oldDom = this._vnode._dom, parentDom = this._parentDom;
 	if (parentDom) {
 		// Set render mode so that we can differantiate where the render request
 		// is coming from. We need this because forceUpdate should never call
 		// shouldComponentUpdate
-		const force = callback!==false;
+		const force = callback !== false;
 
 		let mounts = [];
-		let newDom = diff(parentDom, vnode, assign({}, vnode), this._context, parentDom.ownerSVGElement!==undefined, null, mounts, force, oldDom == null ? getDomSibling(vnode) : oldDom);
+		let newDom = diff(parentDom, vnode, assign({}, vnode), this._context, parentDom.ownerSVGElement !== undefined, null, mounts, force, oldDom == null ? getDomSibling(vnode) : oldDom);
 		commitRoot(mounts, vnode);
 
 		if (newDom != oldDom) {
@@ -150,7 +150,7 @@ let q = [];
  * Asynchronously schedule a callback
  * @type {(cb) => void}
  */
-const defer = typeof Promise=='function' ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout;
+const defer = typeof Promise == 'function' ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout;
 
 /*
  * The value of `Component.debounce` must asynchronously invoke the passed in callback. It is
@@ -163,7 +163,7 @@ const defer = typeof Promise=='function' ? Promise.prototype.then.bind(Promise.r
 
 /**
  * Enqueue a rerender of a component
- * @param {import('./internal').Component} c The component to rerender
+ * @param {!preact.Component} c The component to rerender
  */
 export function enqueueRender(c) {
 	if (!c._dirty && (c._dirty = true) && q.push(c) === 1) {
@@ -175,7 +175,7 @@ export function enqueueRender(c) {
 function process() {
 	let p;
 	q.sort((a, b) => b._vnode._depth - a._vnode._depth);
-	while ((p=q.pop())) {
+	while ((p = q.pop())) {
 		// forceUpdate's callback argument is reused here to indicate a non-forced update.
 		if (p._dirty) p.forceUpdate(false);
 	}
