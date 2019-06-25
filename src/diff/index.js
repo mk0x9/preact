@@ -8,15 +8,15 @@ import options from '../options';
 
 /**
  * Diff two virtual nodes and apply proper changes to the DOM
- * @param {import('../internal').PreactElement} parentDom The parent of the DOM element
- * @param {import('../internal').VNode | null} newVNode The new virtual node
- * @param {import('../internal').VNode | null} oldVNode The old virtual node
- * @param {object} context The current context object
+ * @param {!preact.PreactElement} parentDom The parent of the DOM element
+ * @param {preact.VNode} newVNode The new virtual node
+ * @param {preact.VNode} oldVNode The old virtual node
+ * @param {Object} context The current context object
  * @param {boolean} isSvg Whether or not this element is an SVG node
- * @param {Array<import('../internal').PreactElement>} excessDomChildren
- * @param {Array<import('../internal').Component>} mounts A list of newly
+ * @param {Array<!preact.PreactElement>} excessDomChildren
+ * @param {Array<!preact.Component>} mounts A list of newly
  * mounted components
- * @param {Element | Text} oldDom The current attached DOM
+ * @param {Element|Text} oldDom The current attached DOM
  * element any new dom elements should be placed around. Likely `null` on first
  * render (except when hydrating). Can be a sibling DOM element when diffing
  * Fragments that have siblings. In most cases, it starts out as `oldChildren[0]._dom`.
@@ -175,16 +175,16 @@ export function commitRoot(mounts, root) {
 
 /**
  * Diff two virtual nodes representing DOM element
- * @param {import('../internal').PreactElement} dom The DOM element representing
+ * @param {!preact.PreactElement} dom The DOM element representing
  * the virtual nodes being diffed
- * @param {import('../internal').VNode} newVNode The new virtual node
- * @param {import('../internal').VNode} oldVNode The old virtual node
- * @param {object} context The current context object
+ * @param {!preact.VNode} newVNode The new virtual node
+ * @param {!preact.VNode} oldVNode The old virtual node
+ * @param {Object} context The current context object
  * @param {boolean} isSvg Whether or not this DOM node is an SVG node
  * @param {*} excessDomChildren
- * @param {Array<import('../internal').Component>} mounts An array of newly
+ * @param {Array<preact.Component>} mounts An array of newly
  * mounted components
- * @returns {import('../internal').PreactElement}
+ * @returns {!preact.PreactElement}
  */
 function diffElementNodes(dom, newVNode, oldVNode, context, isSvg, excessDomChildren, mounts) {
 	let i;

@@ -1,4 +1,4 @@
-/** @type {import('./internal').Options}  */
+/** @type {!preact.Options}  */
 const options = {};
 
 export default options;

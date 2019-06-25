@@ -17,7 +17,7 @@
     "build:hooks": "microbundle build --raw --cwd hooks",
     "build:test-utils": "microbundle build --raw --cwd test-utils",
     "build:compat": "microbundle build --raw --cwd compat --globals 'preact/hooks=preactHooks'",
-    "build:gcc": "node_modules/.bin/google-closure-compiler --js src/*.js --js src/*/*.js --js_output_file /dev/null --language_in ECMASCRIPT_NEXT --module_resolution NODE --use_types_for_optimization --compilation_level ADVANCED --warning_level VERBOSE",
+    "build:gcc": "node_modules/.bin/google-closure-compiler --js src/*.js --js src/*/*.js --js_output_file dist/preact.gcc.js --language_in ECMASCRIPT_NEXT --module_resolution NODE --use_types_for_optimization --compilation_level ADVANCED --warning_level VERBOSE",
     "dev": "microbundle watch --raw --format cjs",
     "dev:hooks": "microbundle watch --raw --format cjs --cwd hooks",
     "dev:compat": "microbundle watch --raw --format cjs --cwd compat --globals 'preact/hooks=preactHooks'",

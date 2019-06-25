@@ -43,12 +43,6 @@ preact.Component.prototype.forceUpdate = function (callback) { };
 preact.ComponentChild;
 
 /**
- * @constructor
- * @extends {HTMLElement}
- */
-preact.PreactElement = function () {};
-
-/**
  * @typedef {{
  *  current: *
  * }}
@@ -92,13 +86,46 @@ preact.Key;
 
 /**
  * @typedef {{
- *   vnode: function(!preact.VNode),
- *   unmount: function(!preact.VNode),
- *   diffed: function(!preact.VNode),
- *   event: function(!Event),
- *   requestAnimationFrame: Function,
- *   debounceRendering: Function,
- *   useDebugValue: function((string|number))
+ *   vnode: (function(!preact.VNode)|undefined),
+ *   unmount: (function(!preact.VNode)|undefined),
+ *   diffed: (function(!preact.VNode)|undefined),
+ *   event: (function(!Event)|undefined),
+ *   requestAnimationFrame: (Function|undefined),
+ *   debounceRendering: (Function|undefined),
+ *   useDebugValue: (function((string|number))|undefined)
  * }}
  */
 preact.Options;
+
+/**
+ * @interface
+ * @extends {HTMLElement}
+ */
+preact.PreactElement;
+
+/**
+ * @type {preact.VNode|null}
+ */
+preact.PreactElement.prototype._children;
+
+/**
+ * @type {Object}
+ */
+preact.PreactElement.prototype._listeners;
+
+/**
+ * @type {SVGElement}
+ */
+preact.PreactElement.prototype.ownerSVGElement;
+
+/**
+ * @type {string|number|undefined}
+ */
+preact.PreactElement.prototype.data;
+
+/**
+ * @param {!preact.ComponentChild} vnode
+ * @param {!preact.PreactElement} parentDom
+ * @param {(Element|Text|Object)=} replaceNode
+ */
+preact.render = function(vnode, parentDom, replaceNode) {};

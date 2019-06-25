@@ -4,10 +4,10 @@ import { assign } from '../util';
 
 /**
  * Diff the old and new properties of a VNode and apply changes to the DOM node
- * @param {import('../internal').PreactElement} dom The DOM node to apply
+ * @param {!preact.PreactElement} dom The DOM node to apply
  * changes to
- * @param {object} newProps The new props
- * @param {object} oldProps The old props
+ * @param {Object} newProps The new props
+ * @param {Object} oldProps The old props
  * @param {boolean} isSvg Whether or not this node is an SVG node
  */
 export function diffProps(dom, newProps, oldProps, isSvg) {
@@ -33,7 +33,7 @@ const XLINK_NS = 'http://www.w3.org/1999/xlink';
 
 /**
  * Set a property value on a DOM node
- * @param {import('../internal').PreactElement} dom The DOM node to modify
+ * @param {!preact.PreactElement} dom The DOM node to modify
  * @param {string} name The name of the property to set
  * @param {*} value The value to set the property to
  * @param {*} oldValue The old value the property had
